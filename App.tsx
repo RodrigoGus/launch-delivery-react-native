@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import TelaDePedidos from './TelaDePedidos';
+import TelaDePagamento from './TelaDePagamento';
+import TelaDeLogin from './TelaDeLogin';
+import TelaDeConfirmacao from './TelaDeConfirmacao';
 
-export default function App() {
+export type RootStackParamList = {
+  TelaDeLogin: undefined;
+  TelaDePedidos: undefined;
+  TelaDePagamento: undefined;
+  TelaDeConfirmacao: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="TelaDeLogin">
+        <Stack.Screen name="TelaDeLogin" component={TelaDeLogin} />
+        <Stack.Screen name="TelaDePedidos" component={TelaDePedidos} />
+        <Stack.Screen name="TelaDePagamento" component={TelaDePagamento} />
+        <Stack.Screen name="TelaDeConfirmacao" component={TelaDeConfirmacao} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
